@@ -1,0 +1,17 @@
+---
+- name: Ensure kibana group exists
+  group:
+    state: present
+    name: "{{ kibana_group }}"
+    system: true
+    gid: "{{ kibana_group_id }}"
+  notify: restart kibana
+
+- name: Ensure kibana user exists
+  user:
+    state: present
+    name: "{{ kibana_user }}"
+    system: true
+    uid: "{{ kibana_user_id }}"
+    group: "{{ kibana_group }}"
+  notify: restart kibana    

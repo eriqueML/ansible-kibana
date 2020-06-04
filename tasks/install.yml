@@ -1,0 +1,11 @@
+---
+- name: Download rpm package
+  get_url:
+    url: "{{ kibana_install_rpm_url }}"
+    dest: "{{ kibana_install_rpm_dest }}"
+    validate_certs: no 
+
+- name: Run rpm installation
+  yum:
+    name: "{{ kibana_install_rpm_dest }}/kibana-{{ kibana_version }}-x86_64.rpm"
+    state: installed

@@ -1,0 +1,29 @@
+---
+# kibana user, group vars
+kibana_user: kibana
+kibana_user_id: "{{ omit }}"
+kibana_group: kibana
+kibana_group_id: "{{ omit }}"
+
+# kibana installation vars
+kibana_version: 7.7.1
+kibana_install_rpm_url: "https://artifacts.elastic.co/downloads/kibana/kibana-{{ kibana_version }}-x86_64.rpm"
+kibana_install_rpm_dest: "/tmp"
+
+# kibana main vars
+kibana_config_dir: "/etc/kibana"
+kibana_run_dir: /var/run/kibana
+kibana_logging_dir: /var/log/kibana
+kibana_pid_file: "/var/run/kibana/kibana.pid"
+kibana_config_file: "{{ kibana_config_dir }}/kibana.yml"
+
+# kibana configuration vars
+kibana_server_port: 5601
+kibana_server_host: "{{ inventory_hostname }}"
+kibana_server_name: "{{ ansible_hostname }}"
+
+# elasticsearch vars
+kibana_elasticsearch_hosts:
+  - "http://{{ inventory_hostname }}:9200"
+kibana_elasticsearch_username: null
+kibana_elasticsearch_password: null

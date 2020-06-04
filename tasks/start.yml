@@ -1,0 +1,13 @@
+---
+- name: Add and enable Kibana service.
+  service:
+    name: kibana
+    state: "{{ kibana_service_state }}"
+    enabled: "{{ kibana_service_enabled }}"
+
+- name: Make sure kibana is running before proceeding.
+  wait_for:
+    host: "{{ kibana_host }}"
+    port: "{{ kibana_server_port }}"
+    delay: 3
+    timeout: 300

@@ -1,0 +1,22 @@
+---
+- name: Ensure kibana directories are present
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    recurse: true
+  loop:
+    - "{{ kibana_config_dir }}"
+    - "{{ kibana_run_dir }}"
+    - "{{ kibana_logging_dir }}"
+
+- name: Prepare main configuration file
+  template:
+    src: etc/kibana/kibana.yml.j2
+    dest: "{{ kibana_config_file }}"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    mode: 0660
+  notify: restart kibana
+    

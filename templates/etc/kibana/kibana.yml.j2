@@ -1,0 +1,15 @@
+---
+server.port: {{ kibana_server_port }}
+
+server.host: {{ kibana_server_host }}
+
+server.name: {{ kibana_server_name }}
+
+elasticsearch.hosts: {{ kibana_elasticsearch_hosts | to_json }}
+
+{% if kibana_elasticsearch_username is not null %}
+elasticsearch.username: {{ kibana_elasticsearch_username }}
+{% endif %}
+{% if kibana_elasticsearch_password is not null %}
+elasticsearch.password: {{ kibana_elasticsearch_password }}
+{% endif %}

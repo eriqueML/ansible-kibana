@@ -1,0 +1,12 @@
+---
+- name: Group and user creation
+  include_tasks: user.yml
+
+- name: Run installation tasks
+  include_tasks: install.yml
+
+- name: Config Kibana
+  include_tasks: config.yml
+
+- name: Start Kibana
+  include_tasks: start.yml
