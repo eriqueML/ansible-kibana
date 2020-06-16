@@ -1,0 +1,8 @@
+---
+- name: Export Kibana dashboards
+  command:
+    cmd: >
+      curl -k -X POST -H "kbn-xsrf:true" -d '{"type": "dashboard", "id":"862e2c20-9bf0-11e9-a61b-f742ed613c57"}'
+      http://{{ kibana_server_host }}:{{ kibana_server_port }}/s/{{ kibana_import_used_space }}/api/saved_objects/_export
+    warn: false
+  changed_when: false

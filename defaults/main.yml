@@ -10,19 +10,16 @@ kibana_version: 7.7.1
 kibana_install_rpm_url: "https://artifacts.elastic.co/downloads/kibana/kibana-{{ kibana_version }}-x86_64.rpm"
 kibana_install_rpm_dest: "/tmp"
 
-# kibana controlling run tasks vars
-kibana_create_user_tasks: false
-kibana_install_tasks: false
-kibana_config_tasks: false
-kibana_systemd_tasks: false
-kibana_import_tasks: false
-
 # kibana main vars
 kibana_config_dir: "/etc/kibana"
-kibana_run_dir: /var/run/kibana
-kibana_logging_dir: /var/log/kibana
-kibana_pid_file: "/var/run/kibana/kibana.pid"
+kibana_run_dir: "/var/run/kibana"
 kibana_config_file: "{{ kibana_config_dir }}/kibana.yml"
+kibana_pid_file: "/var/run/kibana/kibana.pid"
+
+# logging vars
+kibana_logging: true
+kibana_logging_dir: /var/log/kibana
+kibana_logging_dest: "{{ kibana_logging_dir }}/kibana.log"
 
 # kibana configuration vars
 kibana_server_port: 5601
@@ -41,7 +38,7 @@ kibana_elasticsearch_hosts:
 # kibana_elasticsearch_password: 
 
 # kibana security vars
-kibana_xpack_security_enabled: true
+kibana_xpack_security_enabled: false
 
 # kibana import vars
 kibana_saved_objects_directory: "{{ kibana_config_dir }}/saved_objects"
@@ -56,4 +53,7 @@ kibana_spaces:
     name: "UAT"
     description: "Uat space for uattesting"
 kibana_import_dashboards: false
-kibana_import_used_space: marketing
+kibana_import_used_space: test
+
+# kibana export vars
+kibana_export_tasks: false

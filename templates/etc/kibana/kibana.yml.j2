@@ -5,6 +5,8 @@ server.host: {{ kibana_server_host }}
 
 server.name: {{ kibana_server_name }}
 
+# ---------------------- kibana elasticsearch -----------------
+
 elasticsearch.hosts: {{ kibana_elasticsearch_hosts | to_json }}
 
 {% if kibana_elasticsearch_username is defined %}
@@ -13,8 +15,14 @@ elasticsearch.username: {{ kibana_elasticsearch_username }}
 {% if kibana_elasticsearch_password is defined %}
 elasticsearch.password: {{ kibana_elasticsearch_password }}
 {% endif %}
+{% if kibana_logging %}
+# ---------------------- kibana logging ------------------------
+
+logging.dest: {{ kibana_logging_dest }}/var/log/kibana/kibana.log
+{% endif%}
 
 # ---------------------- kibana security -----------------------
+
 {% if kibana_xpack_security_enabled %}
 xpack.security.enabled: {{ kibana_xpack_security_enabled }}
 {% endif %}
