@@ -18,6 +18,9 @@
 - name: Import Kibana dashboards
   command:
     cmd: >
-      curl -k -X POST -H "kbn-xsrf:true" --form file=@{{ kibana_saved_objects_directory }}/export.ndjson
+      curl -k -X POST -H "kbn-xsrf:true" --form file=@{{ item }}
       http://{{ kibana_server_host }}:{{ kibana_server_port }}/s/{{ kibana_import_used_space }}/api/saved_objects/_import?overwrite=true
     warn: false
+  changed_when: false
+  with_fileglob:
+    - "{{ kibana_saved_objects_directory }}/*.ndjson"
