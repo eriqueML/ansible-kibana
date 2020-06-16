@@ -8,12 +8,16 @@
 
 - name: Copy saved dashboards
   copy:
-    src: "files/dashboards/export.ndjson"
+    src: "{{ item }}"
     dest: "{{ kibana_saved_objects_directory }}"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+  with_fileglob: 
+    - "files/dashboards/*.ndjson"
     
 - name: Import Kibana dashboards
   command:
     cmd: >
       curl -k -X POST -H "kbn-xsrf:true" --form file=@{{ kibana_saved_objects_directory }}/export.ndjson
-      http://192.168.234.52:5601/s/marketing/api/saved_objects/_import?overwrite=true
+      http://{{ kibana_server_host }}:{{ kibana_server_port }}/s/{{ kibana_import_used_space }}/api/saved_objects/_import?overwrite=true
     warn: false

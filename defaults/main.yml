@@ -49,3 +49,4 @@ kibana_spaces:
     name: "UAT"
     description: "Uat space for uattesting"
 kibana_import_dashboards: false
+kibana_import_used_space: marketing
