@@ -10,3 +10,6 @@
 
 - name: Start Kibana
   include_tasks: start.yml
+
+- name: Import kibana objects
+  include_tasks: import.yml

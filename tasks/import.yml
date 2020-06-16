@@ -1,0 +1,8 @@
+---
+- name: Import spaces to Kibana
+  include_tasks: spaces.yml
+  when: kibana_create_spaces
+
+- name: Import dashboards to Kibana
+  include_tasks: dashboards.yml
+  when: kibana_import_dashboards

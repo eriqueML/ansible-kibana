@@ -1,0 +1,13 @@
+---
+- name: Create Kibana spaces
+  uri:
+    url: "http://{{ kibana_server_host }}:{{ kibana_server_port }}/api/spaces/space"
+    method: POST
+    body_format: json
+    body: "{{ item.value | to_json }}"
+    validate_certs: false
+    force_basic_auth: true
+    headers:
+      "kbn-xsrf": "true"
+    status_code: "200,409"
+  loop: "{{ kibana_spaces | dict2items }}"

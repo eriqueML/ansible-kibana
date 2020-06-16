@@ -22,11 +22,30 @@ kibana_server_port: 5601
 kibana_server_host: "{{ inventory_hostname }}"
 kibana_server_name: "{{ ansible_hostname }}"
 
+# kibana systemd vars
+kibana_service_state: started
+kibana_service_enabled: true
+
 # kibana elasticsearch vars
 kibana_elasticsearch_hosts:
-  - "http://{{ inventory_hostname }}:9200"
-kibana_elasticsearch_username: null
-kibana_elasticsearch_password: null
+  - "http://127.0.0.1:9200"
+# use these vars in case of es credentials
+# kibana_elasticsearch_username: 
+# kibana_elasticsearch_password: 
 
 # kibana security vars
-kibana_xpack_security_enabled: false
+kibana_xpack_security_enabled: true
+
+# kibana import vars
+kibana_saved_objects_directory: "{{ kibana_config_dir }}/saved_objects"
+kibana_create_spaces: false
+kibana_spaces: 
+  test:
+    id: test
+    name: "Test"
+    description: "Test space for testing"
+  uat:
+    id: uat
+    name: "UAT"
+    description: "Uat space for uattesting"
+kibana_import_dashboards: false

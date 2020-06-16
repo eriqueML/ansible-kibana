@@ -1,0 +1,19 @@
+---
+- name: Ensure objects directory exists
+  file:
+    path: "{{ kibana_saved_objects_directory }}"
+    state: directory
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+
+- name: Copy saved dashboards
+  copy:
+    src: "files/dashboards/export.ndjson"
+    dest: "{{ kibana_saved_objects_directory }}"
+    
+- name: Import Kibana dashboards
+  command:
+    cmd: >
+      curl -k -X POST -H "kbn-xsrf:true" --form file=@{{ kibana_saved_objects_directory }}/export.ndjson
+      http://192.168.234.52:5601/s/marketing/api/saved_objects/_import?overwrite=true
+    warn: false
