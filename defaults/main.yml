@@ -10,6 +10,13 @@ kibana_version: 7.7.1
 kibana_install_rpm_url: "https://artifacts.elastic.co/downloads/kibana/kibana-{{ kibana_version }}-x86_64.rpm"
 kibana_install_rpm_dest: "/tmp"
 
+# kibana controlling run tasks vars
+kibana_create_user_tasks: false
+kibana_install_tasks: false
+kibana_config_tasks: false
+kibana_systemd_tasks: false
+kibana_import_tasks: false
+
 # kibana main vars
 kibana_config_dir: "/etc/kibana"
 kibana_run_dir: /var/run/kibana

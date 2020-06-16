@@ -1,15 +1,20 @@
 ---
 - name: Group and user creation
   include_tasks: user.yml
+  when: kibana_create_user_tasks
 
 - name: Run installation tasks
   include_tasks: install.yml
+  when: kibana_install_tasks
 
 - name: Config Kibana
   include_tasks: config.yml
+  when: kibana_config_tasks
 
 - name: Start Kibana
   include_tasks: start.yml
+  when: kibana_systemd_tasks
 
 - name: Import kibana objects
   include_tasks: import.yml
+  when: kibana_import_tasks
